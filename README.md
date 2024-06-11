@@ -1,1 +1,1 @@
-Building different machine learning models on different datasets (msotly from kaggle)
+Building different machine learning models on different datasets (mostly from kaggle)
