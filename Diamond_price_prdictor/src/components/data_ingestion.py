@@ -38,11 +38,20 @@ class DataIngestion:
             logging.info("Dataset read from dataframe")
             df.to_csv(self.data_ingestion_config.raw_data_path,index=False)
             logging.info("Train Test Split")
-            X=df.drop(labels=['price'],axis=1)
-            y=df[['price']]
-            train_set,test_set=train_test_split(X,y,test_size=0.30,random_state=30)
-            train_set.to_csv(self.data_ingestion_config.train_data_path,index=False)
-            test_set.to_csv(self.data_ingestion_config.test_data_path,index=False)
+            X=df.drop(labels=['price','id'],axis=1)
+            y=df['price']
+            logging.info(f'{X.head()}')
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=30)
+            train_set = pd.concat([X_train, y_train], axis=1)
+            test_set = pd.concat([X_test, y_test], axis=1)
+
+            print("X_train shape:", X_train.shape)
+            print("X_test shape:", X_test.shape)
+            print("y_train shape:", y_train.shape)
+            print("y_test shape:", y_test.shape)
+
+            train_set.to_csv(self.data_ingestion_config.train_data_path, index=False)
+            test_set.to_csv(self.data_ingestion_config.test_data_path, index=False)
             logging.info("Data Ingestion is Completed")
             return (
                 self.data_ingestion_config.train_data_path,
