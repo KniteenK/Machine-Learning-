@@ -3,14 +3,18 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression, Ridge,Lasso,ElasticNet
 from sklearn.model_selection import train_test_split,GridSearchCV,cross_val_score
 from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error
+from src.components.data_ingestion import DataIngestion
+from src.components.data_transformation import DataTransformation
 from src.exception import CustomException
 from src.logger import logging
+
 
 from dataclasses import dataclass
 import sys
 import os
 
 from src.utils.Mainutils import MainUtils
+import pickle
 
 @dataclass
 class ModelTrainerConfig:
@@ -21,6 +25,7 @@ class ModelTrainer:
     def __init__(self):
         self.model_train_config=ModelTrainerConfig()
         self.utils=MainUtils()
+    
     
     def initiate_model_trainer(self,train_arr,test_arr):
         try:
@@ -77,12 +82,16 @@ class ModelTrainer:
                 'best_model_name': model_list[best_model_index]
             }
             logging.info(f"best model score:{best_model_dict['best_model_score']}, best model name: {best_model_dict['best_model_name']}")
-            self.utils.save_object(
-                file_path=self.model_train_config.trained_model_config,
-                obj=best_model_dict['best_model_object']
-            )
+            # self.utils.save_object(
+            #     file_path=self.model_train_config.trained_model_config,
+            #     obj=best_model_dict['best_model_object']
+            # )
+            
+            with open(os.path.join('artifacts','model.pkl'), 'wb') as file:
+                    pickle.dump(best_model_dict['best_model_object'], file)
 
 
         except Exception as e:
             logging.info("error during initiation!")
             raise CustomException(e,sys)
+        
