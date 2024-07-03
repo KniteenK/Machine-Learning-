@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .login {
+      width: 300px;
+      margin: 50px auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px 0px #000000;
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #127ddc;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login">
+    <h1>Breast Cancer Predictor</h1>
+    <form action="{{ url_for('form')}}" method="post">
+        <label for="mean_radius">Mean Radius</label>
+        <input type="number" step="any" id="mean_radius" name="mean_radius" required>
+
+        <label for="mean_texture">Mean Texture</label>
+        <input type="number" step="any" id="mean_texture" name="mean_texture" required>
+
+        <label for="mean_perimeter">Mean Perimeter</label>
+        <input type="number" step="any" id="mean_perimeter" name="mean_perimeter" required>
+
+        <label for="mean_area">Mean Area</label>
+        <input type="number" step="any" id="mean_area" name="mean_area" required>
+
+        <label for="mean_smoothness">Mean Smoothness</label>
+        <input type="number" step="any" id="mean_smoothness" name="mean_smoothness" required>
+
+        <label for="mean_compactness">Mean Compactness</label>
+        <input type="number" step="any" id="mean_compactness" name="mean_compactness" required>
+
+        <label for="mean_concavity">Mean Concavity</label>
+        <input type="number" step="any" id="mean_concavity" name="mean_concavity" required>
+
+        <label for="mean_concave_points">Mean Concave Points</label>
+        <input type="number" step="any" id="mean_concave_points" name="mean_concave_points" required>
+
+        <label for="mean_symmetry">Mean Symmetry</label>
+        <input type="number" step="any" id="mean_symmetry" name="mean_symmetry" required>
+
+        <label for="mean_fractal_dimension">Mean Fractal Dimension</label>
+        <input type="number" step="any" id="mean_fractal_dimension" name="mean_fractal_dimension" required>
+
+        <label for="radius_error">Radius Error</label>
+        <input type="number" step="any" id="radius_error" name="radius_error" required>
+
+        <label for="texture_error">Texture Error</label>
+        <input type="number" step="any" id="texture_error" name="texture_error" required>
+
+        <label for="perimeter_error">Perimeter Error</label>
+        <input type="number" step="any" id="perimeter_error" name="perimeter_error" required>
+
+        <label for="area_error">Area Error</label>
+        <input type="number" step="any" id="area_error" name="area_error" required>
+
+        <label for="smoothness_error">Smoothness Error</label>
+        <input type="number" step="any" id="smoothness_error" name="smoothness_error" required>
+
+        <label for="compactness_error">Compactness Error</label>
+        <input type="number" step="any" id="compactness_error" name="compactness_error" required>
+
+        <label for="concavity_error">Concavity Error</label>
+        <input type="number" step="any" id="concavity_error" name="concavity_error" required>
+
+        <label for="concave_points_error">Concave Points Error</label>
+        <input type="number" step="any" id="concave_points_error" name="concave_points_error" required>
+
+        <label for="symmetry_error">Symmetry Error</label>
+        <input type="number" step="any" id="symmetry_error" name="symmetry_error" required>
+
+        <label for="fractal_dimension_error">Fractal Dimension Error</label>
+        <input type="number" step="any" id="fractal_dimension_error" name="fractal_dimension_error" required>
+
+        <label for="worst_radius">Worst Radius</label>
+        <input type="number" step="any" id="worst_radius" name="worst_radius" required>
+
+        <label for="worst_texture">Worst Texture</label>
+        <input type="number" step="any" id="worst_texture" name="worst_texture" required>
+
+        <label for="worst_perimeter">Worst Perimeter</label>
+        <input type="number" step="any" id="worst_perimeter" name="worst_perimeter" required>
+
+        <label for="worst_area">Worst Area</label>
+        <input type="number" step="any" id="worst_area" name="worst_area" required>
+
+        <label for="worst_smoothness">Worst Smoothness</label>
+        <input type="number" step="any" id="worst_smoothness" name="worst_smoothness" required>
+
+        <label for="worst_compactness">Worst Compactness</label>
+        <input type="number" step="any" id="worst_compactness" name="worst_compactness" required>
+
+        <label for="worst_concavity">Worst Concavity</label>
+        <input type="number" step="any" id="worst_concavity" name="worst_concavity" required>
+
+        <label for="worst_concave_points">Worst Concave Points</label>
+        <input type="number" step="any" id="worst_concave_points" name="worst_concave_points" required>
+
+        <label for="worst_symmetry">Worst Symmetry</label>
+        <input type="number" step="any" id="worst_symmetry" name="worst_symmetry" required>
+
+        <label for="worst_fractal_dimension">Worst Fractal Dimension</label>
+        <input type="number" step="any" id="worst_fractal_dimension" name="worst_fractal_dimension" required>
+
+      <button type="submit">Predict</button>
+    </form>
+  </div>
+  {{result}}
+</body>
+</html>
