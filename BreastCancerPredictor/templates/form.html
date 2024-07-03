@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Predictor Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            position: relative;
+        }
+        label .tooltip {
+            visibility: hidden;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        label:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        input {
+            margin-top: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Breast Cancer Predictor</h1>
+        <form action="/predict" method="POST">
+            <label for="mean_radius">Mean Radius
+                <span class="tooltip">The mean of distances from center to points on the perimeter.</span>
+            </label>
+            <input type="number" step="any" id="mean_radius" name="mean_radius" required>
+
+            <label for="mean_texture">Mean Texture
+                <span class="tooltip">The standard deviation of gray-scale values.</span>
+            </label>
+            <input type="number" step="any" id="mean_texture" name="mean_texture" required>
+
+            <label for="mean_perimeter">Mean Perimeter
+                <span class="tooltip">The mean size of the core tumor.</span>
+            </label>
+            <input type="number" step="any" id="mean_perimeter" name="mean_perimeter" required>
+
+            <label for="mean_area">Mean Area
+                <span class="tooltip">The mean area of the tumor.</span>
+            </label>
+            <input type="number" step="any" id="mean_area" name="mean_area" required>
+
+            <label for="mean_smoothness">Mean Smoothness
+                <span class="tooltip">The mean value of local variation in radius lengths.</span>
+            </label>
+            <input type="number" step="any" id="mean_smoothness" name="mean_smoothness" required>
+
+            <label for="mean_compactness">Mean Compactness
+                <span class="tooltip">The mean value of perimeter^2 / area - 1.0.</span>
+            </label>
+            <input type="number" step="any" id="mean_compactness" name="mean_compactness" required>
+
+            <label for="mean_concavity">Mean Concavity
+                <span class="tooltip">The mean value of severity of concave portions of the contour.</span>
+            </label>
+            <input type="number" step="any" id="mean_concavity" name="mean_concavity" required>
+
+            <label for="mean_concave_points">Mean Concave Points
+                <span class="tooltip">The mean number of concave portions of the contour.</span>
+            </label>
+            <input type="number" step="any" id="mean_concave_points" name="mean_concave_points" required>
+
+            <label for="mean_symmetry">Mean Symmetry
+                <span class="tooltip">The mean value of symmetry.</span>
+            </label>
+            <input type="number" step="any" id="mean_symmetry" name="mean_symmetry" required>
+
+            <label for="mean_fractal_dimension">Mean Fractal Dimension
+                <span class="tooltip">The mean value of "coastline approximation" - 1.</span>
+            </label>
+            <input type="number" step="any" id="mean_fractal_dimension" name="mean_fractal_dimension" required>
+
+            <label for="radius_error">Radius Error
+                <span class="tooltip">The standard error for the mean of distances from center to points on the perimeter.</span>
+            </label>
+            <input type="number" step="any" id="radius_error" name="radius_error" required>
+
+            <label for="texture_error">Texture Error
+                <span class="tooltip">The standard error for the standard deviation of gray-scale values.</span>
+            </label>
+            <input type="number" step="any" id="texture_error" name="texture_error" required>
+
+            <label for="perimeter_error">Perimeter Error
+                <span class="tooltip">The standard error for the mean size of the core tumor.</span>
+            </label>
+            <input type="number" step="any" id="perimeter_error" name="perimeter_error" required>
+
+            <label for="area_error">Area Error
+                <span class="tooltip">The standard error for the mean area of the tumor.</span>
+            </label>
+            <input type="number" step="any" id="area_error" name="area_error" required>
+
+            <label for="smoothness_error">Smoothness Error
+                <span class="tooltip">The standard error for the mean value of local variation in radius lengths.</span>
+            </label>
+            <input type="number" step="any" id="smoothness_error" name="smoothness_error" required>
+
+            <label for="compactness_error">Compactness Error
+                <span class="tooltip">The standard error for the mean value of perimeter^2 / area - 1.0.</span>
+            </label>
+            <input type="number" step="any" id="compactness_error" name="compactness_error" required>
+
+            <label for="concavity_error">Concavity Error
+                <span class="tooltip">The standard error for the mean value of severity of concave portions of the contour.</span>
+            </label>
+            <input type="number" step="any" id="concavity_error" name="concavity_error" required>
+
+            <label for="concave_points_error">Concave Points Error
+                <span class="tooltip">The standard error for the mean number of concave portions of the contour.</span>
+            </label>
+            <input type="number" step="any" id="concave_points_error" name="concave_points_error" required>
+
+            <label for="symmetry_error">Symmetry Error
+                <span class="tooltip">The standard error for the mean value of symmetry.</span>
+            </label>
+            <input type="number" step="any" id="symmetry_error" name="symmetry_error" required>
+
+            <label for="fractal_dimension_error">Fractal Dimension Error
+                <span class="tooltip">The standard error for the mean value of "coastline approximation" - 1.</span>
+            </label>
+            <input type="number" step="any" id="fractal_dimension_error" name="fractal_dimension_error" required>
+
+            <label for="worst_radius">Worst Radius
+                <span class="tooltip">The worst or largest mean value for radius.</span>
+            </label>
+            <input type="number" step="any" id="worst_radius" name="worst_radius" required>
+
+            <label for="worst_texture">Worst Texture
+                <span class="tooltip">The worst or largest mean value for texture.</span>
+            </label>
+            <input type="number" step="any" id="worst_texture" name="worst_texture" required>
+
+            <label for="worst_perimeter">Worst Perimeter
+                <span class="tooltip">The worst or largest mean value for perimeter.</span>
+            </label>
+            <input type="number" step="any" id="worst_perimeter" name="worst_perimeter" required>
+
+            <label for="worst_area">Worst Area
+                <span class="tooltip">The worst or largest mean value for area.</span>
+            </label>
+            <input type="number" step="any" id="worst_area" name="worst_area" required>
+
+            <label for="worst_smoothness">Worst Smoothness
+                <span class="tooltip">The worst or largest mean value for smoothness.</span>
+            </label>
+            <input type="number" step="any" id="worst_smoothness" name="worst_smoothness" required>
+
+            <label for="worst_compactness">Worst Compactness
+                <span class="tooltip">The worst or largest mean value for compactness.</span>
+            </label>
+            <input type="number" step="any" id="worst_compactness" name="worst_compactness" required>
+
+            <label for="worst_concavity">Worst Concavity
+                <span class="tooltip">The worst or largest mean value for concavity.</span>
+            </label>
+            <input type="number" step="any" id="worst_concavity" name="worst_concavity" required>
+
+            <label for="worst_concave_points">Worst Concave Points
+                <span class="tooltip">The worst or largest mean value for concave points.</span>
+            </label>
+            <input type="number" step="any" id="worst_concave_points" name="worst_concave_points" required>
+
+            <label for="worst_symmetry">Worst Symmetry
+                <span class="tooltip">The worst or largest mean value for symmetry.</span>
+            </label>
+            <input type="number" step="any" id="worst_symmetry" name="worst_symmetry" required>
+
+            <label for="worst_fractal_dimension">Worst Fractal Dimension
+                <span class="tooltip">The worst or largest mean value for fractal dimension.</span>
+            </label>
+            <input type="number" step="any" id="worst_fractal_dimension" name="worst_fractal_dimension" required>
+
+            <a href="{{ url_for('result') }}" class="btn">Predict</a>
+    </div>
+</body>
+</html>
